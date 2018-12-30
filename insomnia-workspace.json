@@ -1,0 +1,242 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-12-30T23:13:54.362Z",
+	"__export_source": "insomnia.desktop.app:v6.3.2",
+	"resources": [
+		{
+			"_id": "wrk_fc22c5124f1b412bb5cec9d705993a0e",
+			"created": 1545854976600,
+			"description": "",
+			"modified": 1546207371987,
+			"name": "try-envoy-monitor-queries",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_655738d52a0d451ba01936980c794d3f",
+			"color": null,
+			"created": 1545854976802,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1545854976803,
+			"modified": 1545854976802,
+			"name": "New Environment",
+			"parentId": "wrk_fc22c5124f1b412bb5cec9d705993a0e",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_f5924fb95703485bb9907d59adf236ef",
+			"cookies": [
+				{
+					"creation": "2018-12-26T20:19:03.325Z",
+					"domain": "localhost",
+					"hostOnly": true,
+					"httpOnly": true,
+					"id": "10021673502395112",
+					"key": "JSESSIONID",
+					"lastAccessed": "2018-12-27T03:43:08.456Z",
+					"path": "/",
+					"value": "1CAB62B034FC83B30E9C8FB5983D7D16"
+				}
+			],
+			"created": 1545854976819,
+			"modified": 1545882188457,
+			"name": "Default Jar",
+			"parentId": "wrk_fc22c5124f1b412bb5cec9d705993a0e",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_e2bb236a84fe4f768444be3d11a8cfbd",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n  findCandidatesForMonitor(labels:[\\\"zone=east\\\", \\\"supports=custom\\\"]) {\\n    id\\n    labels\\n  }\\n}\"}"
+			},
+			"created": 1546204810181,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_05817e6106e44f78b1b2a409061fabef",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546123060149.0469,
+			"method": "POST",
+			"modified": 1546211609132,
+			"name": "FindCandidates",
+			"parameters": [],
+			"parentId": "wrk_fc22c5124f1b412bb5cec9d705993a0e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:8080/graphql",
+			"_type": "request"
+		},
+		{
+			"_id": "req_bea6d054586743d6aee9ffaa94927787",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"mutation AttachEnvoy($labels:[String!]!)\\n{\\n  attachEnvoy(labels:$labels) {\\n    id\\n  }\\n}\",\"variables\":{\"labels\":[\"zone=east\",\"access=public\",\"supports=custom\"]},\"operationName\":\"AttachEnvoy\"}"
+			},
+			"created": 1546205304330,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_05817e6106e44f78b1b2a409061fabef",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546204810231,
+			"method": "POST",
+			"modified": 1546210588710,
+			"name": "AttachEnvoy",
+			"parameters": [],
+			"parentId": "wrk_fc22c5124f1b412bb5cec9d705993a0e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:8080/graphql",
+			"_type": "request"
+		},
+		{
+			"_id": "req_87c97bb3797b4d50a54d61b4b1956733",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n  envoy {\\n    id\\n    labels\\n  }\\n}\"}"
+			},
+			"created": 1546206220536,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_05817e6106e44f78b1b2a409061fabef",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546204810206,
+			"method": "POST",
+			"modified": 1546210592948,
+			"name": "Envoys",
+			"parameters": [],
+			"parentId": "wrk_fc22c5124f1b412bb5cec9d705993a0e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:8080/graphql",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6acef1fc291d4542a5aa66a1bfe6fbb0",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n  envoy(id:\\\"5c2938ea1155d64a1cd2aa61\\\") {\\n    id\\n    labels\\n  }\\n}\"}"
+			},
+			"created": 1546206837819,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_05817e6106e44f78b1b2a409061fabef",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546150310168.0312,
+			"method": "POST",
+			"modified": 1546210499433,
+			"name": "Specific envoy",
+			"parameters": [],
+			"parentId": "wrk_fc22c5124f1b412bb5cec9d705993a0e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:8080/graphql",
+			"_type": "request"
+		},
+		{
+			"_id": "req_657f7a50930a47c19409e0bc325fbbe5",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"mutation\\n{\\n  detachAllEnvoys {\\n    count\\n  }\\n}\"}"
+			},
+			"created": 1546206855047,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_05817e6106e44f78b1b2a409061fabef",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546095810130.0625,
+			"method": "POST",
+			"modified": 1546210506572,
+			"name": "Detach all envoys",
+			"parameters": [],
+			"parentId": "wrk_fc22c5124f1b412bb5cec9d705993a0e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:8080/graphql",
+			"_type": "request"
+		},
+		{
+			"_id": "req_fe91db9a9a6b4fd095f92e9ac2348645",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"mutation\\n{\\n  detachEnvoy(id:\\\"5c293ed41155d662341f7c26\\\") {\\n    count\\n  }\\n}\"}"
+			},
+			"created": 1546207062702,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_05817e6106e44f78b1b2a409061fabef",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1546084910124.9688,
+			"method": "POST",
+			"modified": 1546210521580,
+			"name": "Detach envoy",
+			"parameters": [],
+			"parentId": "wrk_fc22c5124f1b412bb5cec9d705993a0e",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:8080/graphql",
+			"_type": "request"
+		}
+	]
+}
