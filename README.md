@@ -1,4 +1,5 @@
-This application tried out label-based selection of Envoys using MongoDB as the backing store.
+This application tries out label-based selection of Envoys using MongoDB as the backing store.
+It also uses [GraphQL SPQR](https://github.com/leangen/graphql-spqr) to expose a GraphQL API.
 
 # Running locally
 

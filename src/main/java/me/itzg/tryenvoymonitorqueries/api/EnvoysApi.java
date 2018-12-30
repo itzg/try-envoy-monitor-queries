@@ -11,7 +11,6 @@ import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import java.util.List;
 import me.itzg.tryenvoymonitorqueries.model.Envoy;
 import me.itzg.tryenvoymonitorqueries.model.ResultCount;
-import me.itzg.tryenvoymonitorqueries.store.EnvoyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FluentMongoOperations;
 import org.springframework.stereotype.Service;
@@ -25,12 +24,10 @@ import org.springframework.util.Assert;
 @GraphQLApi
 public class EnvoysApi {
 
-  private final EnvoyRepository envoyRepository;
   private final FluentMongoOperations mongoOperations;
 
   @Autowired
-  public EnvoysApi(EnvoyRepository envoyRepository, FluentMongoOperations mongoOperations) {
-    this.envoyRepository = envoyRepository;
+  public EnvoysApi(FluentMongoOperations mongoOperations) {
     this.mongoOperations = mongoOperations;
   }
 
