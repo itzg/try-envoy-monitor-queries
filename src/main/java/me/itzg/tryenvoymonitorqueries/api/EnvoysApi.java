@@ -11,6 +11,7 @@ import io.leangen.graphql.spqr.spring.annotation.GraphQLApi;
 import java.util.List;
 import me.itzg.tryenvoymonitorqueries.model.Envoy;
 import me.itzg.tryenvoymonitorqueries.model.ResultCount;
+import me.itzg.tryenvoymonitorqueries.services.EnvoyOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.FluentMongoOperations;
 import org.springframework.stereotype.Service;
@@ -25,47 +26,40 @@ import org.springframework.util.Assert;
 public class EnvoysApi {
 
   private final FluentMongoOperations mongoOperations;
+  private final EnvoyOperations envoyOperations;
 
   @Autowired
-  public EnvoysApi(FluentMongoOperations mongoOperations) {
+  public EnvoysApi(FluentMongoOperations mongoOperations, EnvoyOperations envoyOperations) {
     this.mongoOperations = mongoOperations;
+    this.envoyOperations = envoyOperations;
   }
 
   @GraphQLMutation
   public Envoy attachEnvoy(@GraphQLNonNull List<@GraphQLNonNull String> labels) {
     Assert.notEmpty(labels, "One or more labels are required");
 
-    return mongoOperations.insert(Envoy.class)
-        .one(new Envoy().setLabels(labels));
+    return envoyOperations.attach(labels);
   }
 
   @GraphQLQuery
   public Iterable<Envoy> envoy() {
-    return mongoOperations.query(Envoy.class)
-        .all();
+    return envoyOperations.getAll();
   }
 
   @GraphQLQuery
   public Iterable<Envoy> envoy(String id) {
-    return mongoOperations.query(Envoy.class)
-        .matching(query(where("_id").is(id)))
-        .all();
+    return envoyOperations.getOne(id);
   }
 
   @GraphQLMutation
   public ResultCount detachEnvoy(@GraphQLNonNull String id) {
-    final DeleteResult result = mongoOperations.remove(Envoy.class)
-        .matching(query(where("_id").is(id)))
-        .one();
-
-    return new ResultCount().setCount(result.getDeletedCount());
+    final long count = envoyOperations.detachOne(id);
+    return new ResultCount().setCount(count);
   }
 
   @GraphQLMutation
   public ResultCount detachAllEnvoys() {
-    final DeleteResult result = mongoOperations.remove(Envoy.class)
-        .all();
-
-    return new ResultCount().setCount(result.getDeletedCount());
+    final long count = envoyOperations.detachAll();
+    return new ResultCount().setCount(count);
   }
 }
