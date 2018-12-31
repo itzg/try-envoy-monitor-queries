@@ -1,9 +1,5 @@
 package me.itzg.tryenvoymonitorqueries.api;
 
-import static org.springframework.data.mongodb.core.query.Criteria.where;
-import static org.springframework.data.mongodb.core.query.Query.query;
-
-import com.mongodb.client.result.DeleteResult;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLNonNull;
 import io.leangen.graphql.annotations.GraphQLQuery;
@@ -13,28 +9,24 @@ import me.itzg.tryenvoymonitorqueries.model.Envoy;
 import me.itzg.tryenvoymonitorqueries.model.ResultCount;
 import me.itzg.tryenvoymonitorqueries.services.EnvoyOperations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.FluentMongoOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 /**
- * @author Geoff Bourne
- * @since Dec 2018
+ * Provides the API operations for managing fake Envoy entries.
  */
 @Service
 @GraphQLApi
 public class EnvoysApi {
 
-  private final FluentMongoOperations mongoOperations;
   private final EnvoyOperations envoyOperations;
 
   @Autowired
-  public EnvoysApi(FluentMongoOperations mongoOperations, EnvoyOperations envoyOperations) {
-    this.mongoOperations = mongoOperations;
+  public EnvoysApi(EnvoyOperations envoyOperations) {
     this.envoyOperations = envoyOperations;
   }
 
-  @GraphQLMutation
+  @GraphQLMutation(description = "Creates a fake entry in the system that would represent an attached Envoy")
   public Envoy attachEnvoy(@GraphQLNonNull List<@GraphQLNonNull String> labels) {
     Assert.notEmpty(labels, "One or more labels are required");
 
